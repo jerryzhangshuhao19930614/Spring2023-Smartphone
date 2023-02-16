@@ -39,6 +39,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
+    // how many rows we want to show in table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // rows for tblViewTop
         if tableView == tblViewTop {
@@ -56,7 +57,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    // handle cells shown
+    // handle cells shown - data
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // handle tbltop cells
         if tableView == tblViewTop {
@@ -72,9 +73,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellFood", for: indexPath)
             
-//            print("indexPath: ", indexPath, "indexPath.row: ", indexPath.row)
-           
-            // if has updated foodItems, show foodItems for cells
             if foodItems.count > 0 {
                 cell.textLabel?.text = foodItems[indexPath.row]
             }
