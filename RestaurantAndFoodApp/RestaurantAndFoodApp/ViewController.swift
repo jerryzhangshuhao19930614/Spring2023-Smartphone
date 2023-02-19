@@ -19,7 +19,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                        " Maggiano's",
                        "Facing East",
                        "Japonessa Sushi Cocina",
-                       "Bai Tong Thai Restaurant"
+                       "Bai Tong Thai Restaurant",
+                       "No food Restaurant"
                         ]
     
     // food corresponding to each restaurant
@@ -47,14 +48,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         
         // rows for tblViewBottom
-        if foodItems.count == 0 {
-//            print(foodItems.count)
-            return 0
-        }
-        else{
-//            print(foodItems.count)
-            return foodItems.count
-        }
+        return foodItems.count
     }
     
     // handle cells shown - data
@@ -68,17 +62,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             return cell
         }
-        // handle tblbottom cells
-        else {
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellFood", for: indexPath)
-            
-            if foodItems.count > 0 {
-                cell.textLabel?.text = foodItems[indexPath.row]
-            }
-            // return default empty
-            return cell
+        // handle tblbottom cells 
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellFood", for: indexPath)
+        
+        if foodItems.count > 0 {
+            cell.textLabel?.text = foodItems[indexPath.row]
         }
+        // return default empty
+        return cell
     }
     
     // indexPath [0,0]...[0,len - 1]
@@ -86,18 +77,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // get tblViewTop corresponding row number
         if tableView == tblViewTop {
             // get the food list for restaurant to item
-            let item = food[indexPath.row]
-            
-            // parse to foodItems
-            foodItems = item
-            
-            self.tblViewBottom.reloadData()
+            if indexPath.row < food.count{
+                let item = food[indexPath.row]
+                // parse to foodItems
+                foodItems = item
+            }
+            // if restaurant has no food items
+            else{
+                foodItems = []
+            }
         }
-        
-    }
-    
-    
-     
+        self.tblViewBottom.reloadData()
+    } 
 
 }
 
